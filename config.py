@@ -1,12 +1,9 @@
-from flask import Flask,render_template
-from flask_marshmallow import Marshmallow
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import environ
-from flask_openid import OpenID
-import os
 from flask_cors import CORS
-from flask_login import LoginManager,login_user, logout_user, current_user, login_required,UserMixin
-
+from flask_login import LoginManager
+from flask_admin.contrib.sqla import ModelView
+from flask_admin import Admin
 #иницилиазация приложения
 app = Flask(__name__)
 
@@ -28,6 +25,8 @@ app.config['EXTEND_EXISTING'] = True
 
 
 #admin
+
+admin  = Admin(app)
 
 
 

@@ -13,9 +13,7 @@ from flask_limiter.util import get_remote_address
 import base64
 from encrypt import Encrypt
 
-admin  = Admin(app)
-admin.add_view(ModelView(Goods,db.session))
-admin.add_view(ModelView(Orders,db.session))
+
 
 
 limiter = Limiter(app, key_func=get_remote_address)
@@ -25,7 +23,7 @@ encr = Encrypt()
 api = Api(app)
 
 class AllGoods(Resource):
-    @limiter.limit("3/min")
+
     def get(self):
         # Create the list of people from our data
 
@@ -135,7 +133,7 @@ class Buy(Resource):
 
             db.session.add(newOrder)
             db.session.commit()
-            res = make_response({"order":newOrder.id,"data":newOrder.date})
+            res = make_response({"order":newOrder.id,"date":newOrder.date})
             res.set_cookie("_basket", ' ', max_age=0)
             mailSender(params['email'], newOrder.id, product)
             return res
